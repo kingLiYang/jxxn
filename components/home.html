@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <style>
+        body {
+            padding: 10px 20px 0 20px;
+        }
+
+        nav {
+            border-radius: 5px;
+            background: #009DDA;
+            color: #fff;
+            line-height: 50px;
+            padding: 0 0 0 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>首页</nav>
+    <!-- banner图 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">banner图</p>
+    <div class="section">
+        <div class="article">
+            <!-- 存储 token  1小时有效 -->
+            <input name="token" type="hidden" value="" />
+            <div class="item">
+                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                <div class="preBlock">
+                    <img class="preview" id="preview" alt="" name="pic" width="150" height="150" />
+                </div>
+                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+            </div>
+            
+            <div style="clear: left;"></div>
+            <div style="margin-top:10px;">格式：jpg,png| 尺寸：1920*1080| 大小：&lt2M|保证图片文字清晰可见</div>
+        </div>
+    </div>
+    <!-- 宣传位 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">宣传位</p>
+    <div class="section">
+        <div class="article">
+            <!-- 存储 token  1小时有效 -->
+            <div class="item">
+                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                <div class="preBlock">
+                    <img class="preview" id="preview" alt="" name="pic" width="150" height="150" />
+                </div>
+                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+            </div>
+            
+            <div style="clear: left;"></div>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: 'http://www.ccsc58.cc/weixinnew/Suggestions/php-sdk-7.2.3/getToken.php',
+            type: 'POST',
+            dataType: 'JSONP',
+            jsonp: 'callback',
+            jsonpCallback: 'data',
+            success: function (res) {
+                $('input[name=token]').val(res.list);
+            }
+        })
+    });
+    //点击
+    var clickImg = function (obj) {
+        $(obj).parent().find('.upload_input').click();
+
+    }
+    //删除
+    var deleteImg = function (obj) {
+        // var formData = new FormData();
+        //  formData.append('file', $(obj).parent().find('input')[0].files[0]);
+        // formData.append('token', $('input[name=token]').val());
+        // $.ajax({
+        //     url: "http://rs.qiniu.com/delete/",
+        //     type: 'POST',
+        //     data:formData,
+        //     cache: false,
+        //     processData: false,
+        //     async: false,
+        //     contentType: false,
+        //     success:function(){
+
+        //     }
+        // })
+        $(obj).parent().find('input').val('');
+        $(obj).parent().find('img.preview').attr("src", "");
+        //IE9以下
+        $(obj).parent().find('img.preview').css("filter", "");
+        $(obj).hide();
+        $(obj).parent().find('.addImg').show();
+    }
+    //选择图片
+    function change(file) {
+        //预览
+        var pic = $(file).parent().find(".preview");
+        //添加按钮
+        var addImg = $(file).parent().find(".addImg");
+        //删除按钮
+        var deleteImg = $(file).parent().find(".delete");
+
+        var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
+
+        // gif在IE浏览器暂时无法显示
+        if (ext != 'png' && ext != 'jpg' && ext != 'jpeg') {
+            if (ext != '') {
+                alert("图片的格式必须为png或者jpg或者jpeg格式！");
+            }
+            return;
+        }
+        html5Reader(file, pic, addImg, deleteImg);
+
+    }
+    //H5渲染
+    function html5Reader(file, pic, addImg, deleteImg) {
+        var formData = new FormData();
+        formData.append('file', file.files[0]);
+        formData.append('token', $('input[name=token]').val());
+        $.ajax({
+            url: 'http://up-z1.qiniup.com',
+            type: 'POST',
+            cache: false,
+            data: formData,
+            processData: false,
+            async: false,
+            contentType: false,
+            success: function (res) {
+                pic.attr("src", 'http://ov0v30wya.bkt.clouddn.com/' + res.key);
+            }
+        })
+
+        addImg.hide();
+        deleteImg.show();
+    }
+</script>
+
+</html>

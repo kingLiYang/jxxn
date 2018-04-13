@@ -1,0 +1,135 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>管理后台</title>
+
+    <link rel="stylesheet" href="css/index.css" type="text/css" media="screen" />
+
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/tendina.min.js"></script>
+    <script type="text/javascript" src="js/common.js"></script>
+    <style>
+        .user {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 0 100px 0;
+        }
+
+        .user div {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .user div:first-of-type {
+            width: 50px;
+            height: 50px;
+        }
+
+        .user div:first-of-type img {
+            width: 100%;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <!--菜单-->
+    <div class="left-menu">
+        <div class="user">
+            <div>
+                <img src="images/timg.jpg" alt="">
+            </div>
+            <div>
+                <span>用户名</span>
+                <span>系统管理员</span>
+            </div>
+        </div>
+        <ul id="menu">
+            <li class="menu-list">
+                <a style="cursor:pointer" class="firsta" href="components/home.html" target="menuFrame">
+                    <img src="images/1.jpg" alt="" style="width:25px;height:25px;"> 首页
+                    <span class="sz"></span>
+                </a>
+            </li>
+            <li class="menu-list" id="menu1">
+                <a style="cursor:pointer" class="firsta">
+                    <img src="images/2.jpg" alt="" style="width:25px;height:25px;"> 产品中心
+                    <i class="glyph-icon xlcd"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="components/box.html" target="menuFrame">
+                            <i class="glyph-icon icon-chevron-right1"></i>保温箱</a>
+                    </li>
+                    <li>
+                        <a href="components/ice.html" target="menuFrame">
+                            <i class="glyph-icon icon-chevron-right2"></i>冰板</a>
+                    </li>
+                    <li>
+                        <a href="components/thermometer.html" target="menuFrame">
+                            <i class="glyph-icon icon-chevron-right3"></i>温度计</a>
+                    </li>
+                    <li>
+                        <a href="components/cloud.html" target="menuFrame">
+                            <i class="glyph-icon icon-chevron-right4"></i>云平台</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-list">
+                <a style="cursor:pointer" class="firsta" href="components/solution.html" target="menuFrame">
+                    <img src="images/3.jpg" alt="" style="width:25px;height:25px;">解决方案
+                    <s class="sz"></s>
+                </a>
+            </li>
+            <li class="menu-list" id="menu2">
+                <a style="cursor:pointer" class="firsta">
+                    <img src="images/4.jpg" alt="" style="width:25px;height:25px;">精新商学院
+                    <i class="glyph-icon xlcd"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="components/schoolEdit.html" target="menuFrame">
+                            <i class="glyph-icon icon-chevron-right1"></i>页面编辑</a>
+                    </li>
+                    <li>
+                        <a href="components/msg.html" target="menuFrame">
+                            <i class="glyph-icon icon-chevron-right1"></i>信息列表</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="menu-list" id="menu3">
+                <a style="cursor:pointer" class="firsta">
+                    <img src="images/5.jpg" alt="" style="width:25px;height:25px;">关于我们
+                    <i class="glyph-icon xlcd"></i>
+                </a>
+                <ul>
+                    <li>
+                        <a href="components/mineEdit.html" target="menuFrame">
+                            <i class="glyph-icon icon-chevron-right1"></i>页面编辑</a>
+                    </li>
+                    <li>
+                        <a href="components/recruit.html" target="menuFrame">
+                            <i class="glyph-icon icon-chevron-right1"></i>招聘信息
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+
+    <!--菜单右边的iframe页面-->
+    <div id="right-content" class="right-content">
+        <div class="content">
+            <div id="page_content">
+                <iframe id="menuFrame" name="menuFrame" src="components/home.html" style="overflow:visible;" scrolling="yes" frameborder="no"
+                    width="100%" height="100%"></iframe>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
