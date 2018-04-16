@@ -1,12 +1,112 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
+
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>产品管理</title>
-<link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        .boxDiv {
+            padding: 20px 0 0 0;
+        }
+
+        .boxDiv ul li {
+            border-bottom: 1px dashed #ccc;
+            padding: 10px 0 10px 0;
+        }
+
+        .boxDiv ul li:last-of-type {
+            border: none;
+            padding: 0;
+        }
+
+        .boxDiv ul li .xuanBig {
+            display: flex;
+            margin: 0 0 10px 0;
+        }
+
+        .boxTex {
+            margin: 10px 0 0 0;
+            padding: 10px 0 0 35px;
+        }
+    </style>
 </head>
 
 <body>
-    <p>温度计</p>
+    <nav>产品中心 &gt; 温度计</nav>
+    <div class="boxDiv">
+        <ul>
+            <li>
+                <div class="xuanBig">
+                    <input name="token" type="hidden" value="" />
+                    <span>上传图片：</span>
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+                <div>
+                    <span>标题：
+                        <input type="text" />
+                    </span>
+                </div>
+            </li>
+            <li>
+                <div class="xuanBig">
+                    <span>上传图片：</span>
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+                <div>
+                    <span>标题：
+                        <input type="text" />
+                    </span>
+                </div>
+            </li>
+            <li class="boxPush"></li>
+        </ul>
+        <div class="dirImg">
+            <div class="xuanBig">
+                <div class="item boxAdd" style="float:none;left:35px;">
+                    <img class="addImg" src="../images/add.png" />
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="boxTex">
+        <p>文字介绍：</p>
+        <textarea name="" id="" cols="80" rows="10"></textarea>
+    </div>
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
+        <button type="button" class="btn btn-primary">提交</button>
+    </div>
 </body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
+<script>
+    $(function () {
+        // 点击添加
+        var html;
+        $(".boxAdd").on("click", function () {
+            html = ' <li><div class="xuanBig"><span>上传图片：</span><div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" /><div class="preBlock"><img class="preview" id="preview" alt="" name="pic" width="50" height="50" /></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" /></div><div style="clear: left;"></div></div><div><span>标题：<input type="text" /></span></div></li>';
+            $(".boxPush").before(html);
+        })
+    })
+</script>
+
 </html>

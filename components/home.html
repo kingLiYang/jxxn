@@ -6,19 +6,8 @@
     <title>产品管理</title>
     <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
     <style>
-    ::-webkit-scrollbar {display:none}
-        body {
-            padding: 10px 20px 20px 20px;
-        }
-
-        nav {
-            border-radius: 5px;
-            background: #009DDA;
-            color: #fff;
-            line-height: 50px;
-            padding: 0 0 0 10px;
-        }
         .xuan,.proImg,.dirDiv{
             display:flex;
             flex-flow: wrap;
@@ -81,7 +70,6 @@
     <!-- 宣传位 -->
     <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">宣传位</p>
     <div class="section">
-
         <div class="article xuan">
             <div class="xuanDiv">
                 <div>
@@ -393,16 +381,17 @@
             <div class="dirImg dirAddto">
                 <div class="xuanBig">
                     <div class="item dirAdd">
-                        <img class="addImg" src="../images/upload.png" />
+                        <img class="addImg" src="../images/add.png" />
                   </div>
                 </div>
             </div>
         </div>
     </div>
-    <div style="display:flex;justify-content:center;"> <button type="button" class="btn btn-primary">提交</button></div>
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;"> <button type="button" class="btn btn-primary">提交</button></div>
 </body>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
 <script>
 $(function(){
     // 点击添加宣传位
@@ -422,92 +411,6 @@ $(function(){
 })
 
 
-
-
-// 图片上传
-    $(document).ready(function () {
-        $.ajax({
-            url: 'http://www.ccsc58.cc/weixinnew/Suggestions/php-sdk-7.2.3/getToken.php',
-            type: 'POST',
-            dataType: 'JSONP',
-            jsonp: 'callback',
-            jsonpCallback: 'data',
-            success: function (res) {
-                $('input[name=token]').val(res.list);
-            }
-        })
-    });
-    //点击
-    var clickImg = function (obj) {
-        $(obj).parent().find('.upload_input').click();
-
-    }
-    //删除
-    var deleteImg = function (obj) {
-        // var formData = new FormData();
-        //  formData.append('file', $(obj).parent().find('input')[0].files[0]);
-        // formData.append('token', $('input[name=token]').val());
-        // $.ajax({
-        //     url: "http://rs.qiniu.com/delete/",
-        //     type: 'POST',
-        //     data:formData,
-        //     cache: false,
-        //     processData: false,
-        //     async: false,
-        //     contentType: false,
-        //     success:function(){
-
-        //     }
-        // })
-        $(obj).parent().find('input').val('');
-        $(obj).parent().find('img.preview').attr("src", "");
-        //IE9以下
-        $(obj).parent().find('img.preview').css("filter", "");
-        $(obj).hide();
-        $(obj).parent().find('.addImg').show();
-    }
-    //选择图片
-    function change(file) {
-        //预览
-        var pic = $(file).parent().find(".preview");
-        //添加按钮
-        var addImg = $(file).parent().find(".addImg");
-        //删除按钮
-        var deleteImg = $(file).parent().find(".delete");
-
-        var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
-
-        // gif在IE浏览器暂时无法显示
-        if (ext != 'png' && ext != 'jpg' && ext != 'jpeg') {
-            if (ext != '') {
-                alert("图片的格式必须为png或者jpg或者jpeg格式！");
-            }
-            return;
-        }
-        html5Reader(file, pic, addImg, deleteImg);
-
-    }
-    //H5渲染
-    function html5Reader(file, pic, addImg, deleteImg) {
-        var formData = new FormData();
-        formData.append('file', file.files[0]);
-        formData.append('token', $('input[name=token]').val());
-        $.ajax({
-            url: 'http://up-z1.qiniup.com',
-            type: 'POST',
-            cache: false,
-            data: formData,
-            processData: false,
-            async: false,
-            contentType: false,
-            success: function (res) {
-                pic.attr("src", 'http://ov0v30wya.bkt.clouddn.com/' + res.key);
-            }
-        })
-
-        addImg.hide();
-        deleteImg.show();
-    }
 </script>
 
 </html>
