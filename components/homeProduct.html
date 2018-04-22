@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <style>
+        .xuan,.proImg,.dirDiv{
+            display:flex;
+            flex-flow: wrap;
+            margin:0 0 10px 0;
+        }
+        .xuanDiv{
+            display:flex;width:50%;margin-bottom: 10px;
+        }
+        .xuanDiv div:first-of-type,.proSpan{
+            display:flex;flex-direction: column;
+        }
+        .xuanDiv div:first-of-type span:last-of-type{
+            margin:10px 10px 0 0;
+        }
+        .xuanBig{
+            width:max-content;
+        }
+        .xuanBig span:first-of-type{
+            float:left;
+        }
+        .xuanBut{
+            border:1px dashed #000;padding:10px;width:100px;margin:auto;text-align:center;cursor:pointer;
+        }
+        .proDiv{
+            display: flex;
+            justify-content:space-around;
+        }
+        .proSpan{
+            width:50%;
+            margin:10px 0 0 0;
+        }
+        .dirDiv .dirImg{
+            width:25%;
+            margin:0 0 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>首页/产品中心</nav>
+
+    <!-- 产品中心 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">产品中心</p>
+    <div>
+        <p>上传图片：请上传6张清晰图，尺寸为竖图480*320，格式为jpg/png，每张图片尺寸一致，单张图片不超过500kB</p>
+         <div class="article proDiv">
+            <div class="">
+                <div class="xuanBig">
+                        <input name="token" type="hidden" value="" />
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+            <div class="">
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+            <div class="">
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+            <div class="">
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+            <div class="">
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+            <div class="">
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+        </div>
+        <div class="proImg">
+            <div class="proSpan">
+                <span>图1链接：<input type="text" /></span>
+            </div>
+            <div class="proSpan">
+                <span>图2链接：<input type="text" /></span>
+            </div>
+            <div class="proSpan">
+                <span>图3链接：<input type="text" /></span>
+            </div>
+            <div class="proSpan">
+                <span>图4链接：<input type="text" /></span>
+            </div>
+            <div class="proSpan">
+                <span>图5链接：<input type="text" /></span>
+            </div>
+            <div class="proSpan">
+                <span>图6链接：<input type="text" /></span>
+            </div>
+        </div>
+    </div>
+  
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;"> <button type="button" class="btn btn-primary">提交</button></div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
+<script>
+$(function(){
+
+})
+
+
+</script>
+
+</html>

@@ -1,0 +1,413 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+    <style>
+        .boxDiv {
+            padding: 20px 0 0 0;
+        }
+
+        .boxDiv ul li {
+            border-bottom: 1px dashed #ccc;
+            padding: 10px 0 10px 0;
+        }
+
+        .boxDiv ul li:last-of-type {
+            border: none;
+            padding: 0;
+        }
+
+        .boxDiv ul li .xuanBig {
+            display: flex;
+            margin: 0 0 10px 0;
+        }
+
+        .boxTex {
+            margin: 10px 0 0 0;
+            padding: 10px 0 0 35px;
+        }
+
+        .bigPrio {
+            padding: 10px 0 0 10px;
+        }
+
+        #tit {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            background: #fff;
+            padding-bottom: 10px;
+        }
+
+        #tit span {
+            font-size: 16px;
+            text-align: center;
+            color: #ccc;
+            background: #fff;
+            color: #000;
+            border: 1px solid #ccc;
+            line-height: 50px;
+            padding: 0 15px;
+            cursor: pointer;
+        }
+
+        #tit span.select {
+            background: #009DDA;
+            color: #fff;
+        }
+
+        .tdImg img {
+            width: 30px;
+            height: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>产品中心 &gt; 产品列表</nav>
+    <div class="bigPrio">
+        <div id="tit">
+            <span class="select">保温箱</span>
+            <span>冰排</span>
+            <span>温度计</span>
+            <span>云平台</span>
+        </div>
+        <div style="margin:0 0 10px 20px;">
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#add">添加</button>
+            <button type="button" class="btn btn-primary isOrder">提交</button>
+            <button type="button" class="btn btn-primary isCancel">取消</button>
+        </div>
+
+        <!--表格-->
+        <div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <input type="checkbox">
+                            </th>
+                            <th>序号</th>
+                            <th>标题</th>
+                            <th>图片</th>
+                            <th>是否显示到首页</th>
+                            <th>操作</th>
+                        </tr>
+                    </thead>
+                    <tbody class="proList">
+                    </tbody>
+                </table>
+            </div>
+            <!-- <div class="linkBox"></div> -->
+            <form id="form1" runat="server">
+                    <div>
+                    </div>
+                    <div>
+                        <ul class="pagination" id="pagination">
+                        </ul>
+                        <input type="hidden" id="PageSize" runat="server" value="" />
+                        <input type="hidden" id="countindex" runat="server" value="" />
+    
+                        <!--设置最多显示的页码数 可以手动设置 默认为7-->
+                        <input type="hidden" id="visiblePages" runat="server" value="7" />
+                    </div>
+                </form>
+
+        </div>
+    </div>
+
+    <!--添加 弹框-->
+    <div class="modal fade" id="add">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content message_align">
+
+                <div class="modal-body">
+                    <div class="boxDiv">
+                        <ul>
+                            <li style="padding:0 0 0 100px;">
+                                <div class="xuanBig">
+                                    <input name="token" type="hidden" value="" />
+                                    <span>上传图片：</span>
+                                    <div class="item">
+                                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                                        <div class="preBlock">
+                                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                                        </div>
+                                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                                    </div>
+                                    <div style="clear: left;"></div>
+                                </div>
+                                <div>
+                                    <span>标题：
+                                        <input type="text" class="title">
+                                    </span>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-info proAdd">提交</a>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!-- 修改  弹框 -->
+    <div class="modal fade" id="proEdit">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content message_align">
+
+                <div class="modal-body">
+                    <div class="boxDiv">
+                        <ul>
+                            <li style="padding:0 0 0 100px;">
+                                <div class="xuanBig">
+                                    <input name="token" type="hidden" value="" />
+                                    <span>图片：</span>
+                                    <img class="previewEdit" id="previewEdit" alt="" name="pic" width="50" height="50" style="margin:0 10px 0 0;">
+                                    <span>修改为：</span>
+                                    <input type='hidden' name="editId">
+                                    <div class="item">
+                                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                                        <div class="preBlock">
+                                            <img class="preview" id="editImg" alt="" name="pic" width="50" height="50" />
+                                        </div>
+                                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                                    </div>
+                                    <div style="clear: left;"></div>
+                                </div>
+                                <div>
+                                    <span>标题：
+                                        <input type="text" class="titleEdit">
+                                    </span>
+                                </div>
+                            </li>
+
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <a class="btn btn-info prolistEdit">提交</a>
+                    <button type="button" class="btn btn-info" data-dismiss="modal">取消</button>
+                </div>
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/toastr.min.js"></script>
+<script src="../js/jqPaginator.min.js"></script>
+<!-- <script src="../js/page.js"></script> -->
+<script>
+    $(function () {
+        toastr.options = {
+            timeOut: "1000",
+            positionClass: "toast-center-center"
+        }; //超时时间 == 3秒
+        show(1,false);
+
+        function show(page=1,isFirst = true) {
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/products/productShow",
+                type: "post",
+                data: {
+                    proType: $(".select").text(),
+                    page:page
+                },
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.code == 200) {
+                        if(isFirst == false){
+                            loadpage(res.count, 10);
+                        }
+                        
+                        var dataArr = [];
+                        res.list.forEach((item, index) => {
+                            dataArr.push(
+                                '<tr>',
+                                `<td><input type="checkbox" data_id=${item.id} class="inputPro"></td>`,
+                                '<td>', index + 1, '</td>',
+                                '<td>', item.title, '</td>',
+                                `<td class="tdImg"><img src="${item.picture}"></td>`,
+                                '<td>', item.is_home, '</td>',
+                                `<td class="proEdit">编辑</td>`,
+                                '</tr>'
+                            )
+                        });
+                        $(".proList").html(dataArr.join(''));
+                    } else {
+                        $(".proList").html('');
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+        $('#tit span').click(function () {
+            $(this).addClass('select').siblings().removeClass('select');
+            show(1,false);
+        })
+        // 添加
+        $(".proAdd").on("click", function () {
+            var proArr = [];
+            for (let i = 0; i < $(".title").length; i++) {
+                var obj = {};
+                obj.title = $(".title")[i].value;
+                obj.imgUrl = $(".preview")[i].getAttribute("src");
+                if (obj.title != "" && obj.imgUrl != "") {
+                    proArr.push(obj);
+                }
+            }
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/products/productAdd",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    type: $(".select").text(),
+                    proList: proArr
+                },
+                success: function (res) {
+                    show();
+                    $("#add").modal('hide');
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
+        // 修改 获取内容
+        $("body").on("click", ".proEdit", function () {
+            let id = $(this).parent().find('input').attr("data_id");
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/products/productUp",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    id: id
+                },
+                success: function (res) {
+                    $("input[name=editId]").val(res.list.id);
+                    $("#previewEdit").attr("src", res.list.picture);
+                    $(".titleEdit").val(res.list.title);
+                    $("#proEdit").modal('show');
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
+        //  修改  提交
+        $(".prolistEdit").on("click", function () {
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/products/productUpdate",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    id: $("input[name=editId]").val(),
+                    imgUrl: $("#editImg").attr("src"),
+                    title: $(".titleEdit").val()
+                },
+                success: function (res) {
+                    if (res.code == 200) {
+                        show();
+                        $("#proEdit").modal('hide');
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
+
+        // 是否显示到首页
+        function isShow(isStatus){
+            let arr = [];
+            for(let i=0;i<$(".inputPro").length;i++){
+                if($($(".inputPro")[i]).prop("checked")){
+                    let input = $(".inputPro")[i];
+                    arr.push($(input).attr("data_id"));
+                }
+            }
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/products/productIs",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    id: arr,
+                    isHome: isStatus
+                },
+                success: function (res) {
+                    console.log(res);
+                        show();
+                        toastr.info(res.message);
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+        $(".isOrder").on("click",function(){
+            isShow('是');
+        })
+        $(".isCancel").on("click",function(){
+            isShow('否');
+        })
+        // 分页
+        function loadpage(myPageCount, myPageSize) {
+            var countindex = myPageCount % myPageSize > 0 ? (myPageCount / myPageSize) + 1 : (myPageCount /
+                myPageSize);
+            $("#countindex").val(countindex);
+            $.jqPaginator('#pagination', {
+                totalPages: parseInt($("#countindex").val()),
+                visiblePages: parseInt($("#visiblePages").val()),
+                currentPage: 1,
+                first: '<li class="first"><a href="javascript:;">首页</a></li>',
+                prev: '<li class="prev"><a href="javascript:;"><i class="arrow arrow2"></i>上一页</a></li>',
+                next: '<li class="next"><a href="javascript:;">下一页<i class="arrow arrow3"></i></a></li>',
+                last: '<li class="last"><a href="javascript:;">末页</a></li>',
+                page: '<li class="page"><a href="javascript:;">{{page}}</a></li>',
+                onPageChange: function (num, type) {
+                    if (type == "change") {
+                        exeData(num, type, myPageCount, myPageSize);
+                    }
+                }
+            });
+        }
+
+        function exeData(num, type, myPageCount, myPageSize) {
+            loadpage(myPageCount, myPageSize);
+            alert(num);
+            show(num);
+            //后续肯定还有数据展示的js 这里只是简单的演示
+        }
+    })
+</script>
+
+</html>

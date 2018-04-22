@@ -1,6 +1,6 @@
 
 $(document).ready(function(){
-    $('#menu1,#menu2,#menu3').tendina({
+    $('#menu1,#menu2,#menu3,#menu4').tendina({
         openCallback: function(clickedEl) {
             clickedEl.addClass('opened');
         },

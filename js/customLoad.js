@@ -52,7 +52,7 @@ function change(file) {
     var ext = file.value.substring(file.value.lastIndexOf(".") + 1).toLowerCase();
 
     // gif在IE浏览器暂时无法显示
-    if (ext != 'png' && ext != 'jpg' && ext != 'jpeg') {
+    if (ext != 'png' && ext != 'jpg' && ext != 'jpeg' && ext != 'doc' && ext != 'docx') {
         if (ext != '') {
             alert("图片的格式必须为png或者jpg或者jpeg格式！");
         }
@@ -75,7 +75,7 @@ function html5Reader(file, pic, addImg, deleteImg) {
         async: false,
         contentType: false,
         success: function (res) {
-            pic.attr("src", 'http://ov0v30wya.bkt.clouddn.com/' + res.key);
+             pic.attr("src", 'http://ov0v30wya.bkt.clouddn.com/' + res.key);
         }
     })
 

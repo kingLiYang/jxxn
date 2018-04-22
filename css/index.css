@@ -14,12 +14,7 @@ transform:rotate(-90deg);
 .xlcddown{
 	width:20px;height:20px; margin-top:2px !important; 
 	}
-.sz:after{content:url(../images/set.png); float:right; margin:14px 10px 0 0}
-.icon-chevron-right1:before{padding-left:10px; content:url(../images/bi.png)}
-.icon-chevron-right2:before{padding-left:10px; content:url(../images/menu.png)}
-.icon-chevron-right3:before{padding-left:10px; content:url(../images/w_cloud.png)}
-.icon-user:before {}
-.icon-signout:before {}
+
 .glyph-icon{vertical-align:middle;font-family: FontAwesome;font-size:12px;font-style: normal; margin-top:4px; float:left;}
 
 
@@ -83,7 +78,7 @@ ul,li{padding:0;margin:0}
 .menu-list ul li{height:38px !important; border-bottom:solid 1px #3c3c46}
 /* .menu-list a{ background:#32323a;height:38px;} */
 .menu-list a:hover{ color: rgb(10, 10, 10) !important;}
-.menu-list a i{opacity:1; padding-left: 10px; padding-right: 10px;}
+.menu-list a span{opacity:1; padding-left: 10px; padding-right: 45px;}
 .menu-list ul a{color: #000; display: block;}
 .menu-list ul a:hover{background: #0c89ff; color: #fff;}
 
@@ -103,37 +98,7 @@ ul,li{padding:0;margin:0}
 .content{position: relative; min-height: 100%; /*background: #f5f5f5;*/ margin-top:0px; margin-right: 5px;}
 #page_content{position: absolute; width: 100%; height: 100%;}
 
-/*底部版权*/
 
-
-/*登录模块*/
-.nav_top{width:100%;height:60px; margin:auto; border-bottom:solid 1px #e8e8e8}
-.nav_tcon{width:980px; height:60px;margin:auto;}
-.nav_tcon .logoimg{width:35px; height:35px; float:left; margin-top:12px;}
-.nav_tcon .logoimg>img{width:35px; height:35px}
-.nav_tcon .logotitle{ float:left;height:35px; margin-top:12px;width:100px; margin-left:5px}
-.nav_tcon .logotitle>span{width:100%; float:left; font-size:22px; font-weight:bold; font-family:"微软雅黑"; color:#666666; float:left; line-height:20px;}
-.nav_tcon .logotitle>p{font-size:12px; color:#999}
-.nav_tcon .logoname{ float:left;height:35px; line-height:35px; margin-top:12px;font-size:17px; font-weight:bold; font-family:"微软雅黑"; color:#777777;}
-
-.logo_content{width:100%;height:auto; display:table; padding:35px 0 50px 0; border-bottom:solid 1px #e8e8e8}
-.logo_ccon{width:920px; height:auto;margin:auto;display:table}
-.logobei{ float:left;}
-
-.logo_enter{ float:right;width:290px; height:440px; border:solid 1px #cfcfcf; margin-top:15px}
-.logo_enter>span{width:260px; margin:18px 15px 2px 15px; float:left;padding:0 0 2px 0}
-.logo_enter>span>a{ float:right; font-size:12px; color:#0c89ff}
-.logo_enter>input{ float:left;width:260px; margin:0 15px; height:40px; border:solid 1px #cfcfcf; text-indent:0.5em; font-size:16px;}
-.logo_enter>button{ float:left;width:260px; margin:0 15px;height:45px; background:#0c89ff; color:#fff; border:0; font-size:18px; margin-top:18px; cursor:pointer}
-.logo_enter>img.logo_ewm{width:106px; height:106px; margin:15px 92px}
-.logo_enter .logo_zc{width:100%; float:left; text-align:center; }
-.logo_enter .logo_zc>a{font-size:12px; color:#0c89ff}
-
-/*底部版权*/
-.down_info{display:table;width:100%; margin:30px auto 0 auto; text-align:center}
-.information{width:100%; height:25px; text-align:center}
-.information>a{ text-decoration:none; color:#444; font-family:"微软雅黑"}
-.down_info>p{width:100%; text-align:center; color:#999; font-size:11px; margin-top:2px}
 
 
 

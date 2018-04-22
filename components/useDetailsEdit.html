@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/solution.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+</head>
+
+<body>
+    <nav>应用列表 &gt; 修改</nav>
+    <div style="margin: 10px 0 10px 23px;">
+        标题：
+        <input type="text" class="titleEdit">
+    </div>
+    <div style="margin:0 0 10px 23px;">
+        简介：
+        <input type="text" class="jianjie">
+    </div>
+    <!-- banner图 -->
+    <div class="section">
+        <div class="article dirDiv" style="border:none;">
+            <!-- 存储 token  1小时有效 -->
+            <input name="token" type="hidden" value="" />
+            <div class="dirImg">
+                <div class="xuanBig" style="display: flex;">
+                    <input name="token" type="hidden" value="" />
+                    <span>图片：</span>
+                    <img class="previewEdit" id="previewEdit" alt="" name="pic" width="50" height="50" style="margin:0 10px 0 0;">
+                    <span>修改为：</span>
+                    <input type='hidden' name="editId">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="editImg" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+        </div>
+        <div style="margin:0 0 0 23px;">
+            <span>详情：</span>
+            <script id="editor" type="text/plain" style="height:500px;"></script>
+        </div>
+
+    </div>
+
+
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
+        <button type="button" class="btn btn-primary order">提交</button>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/_examples/editor_api.js"></script>
+<script src="../js/toastr.min.js"></script>
+<script>
+    var ue = UE.getEditor('editor');
+</script>
+<script>
+    $(function () {
+        toastr.options = {
+            timeOut: "1000",
+            positionClass: "toast-center-center"
+        }; //超时时间 == 3秒
+        $.ajax({
+            url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/adhibition/adUp",
+            type: "post",
+            dataType: "JSON",
+            data: {
+                id: window.sessionStorage.getItem("id")
+            },
+            success: function (res) {
+                
+                $("input[name=editId]").val(res.list.id);
+                $("#previewEdit").attr("src", res.list.picture1);
+                $(".titleEdit").val(res.list.title);
+                $(".jianjie").val(res.list.brief_introduction);
+                var de = res.list.content;
+                ue.addListener("ready", function () {
+        // editor准备好之后才可以使用
+        ue.setContent(de);
+
+        });
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        //  修改  提交
+        $(".order").on("click", function () {
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/adhibition/adUpdate",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    id: $("input[name=editId]").val(),
+                    imgUrl: $("#editImg").attr("src"),
+                    title: $(".titleEdit").val(),
+                    content:UE.getEditor('editor').getPlainTxt(),
+                    desc:$(".jianjie").val()
+
+                },
+                success: function (res) {
+                    if (res.code == 200) {
+                        window.location.href = "useList.html";
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
+
+    })
+</script>
+
+</html>
