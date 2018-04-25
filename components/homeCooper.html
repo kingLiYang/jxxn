@@ -17,6 +17,11 @@
             margin: 0 0 10px 0;
         }
 
+        .xuan li {
+            width: 25%;
+            margin: 0 0 20px 0;
+        }
+
         .xuanDiv {
             display: flex;
             width: 50%;
@@ -70,37 +75,21 @@
 <body>
     <nav>首页/合作伙伴</nav>
 
-    <!-- 合作伙伴 -->
+    <!-- 宣传位 -->
     <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">合作伙伴</p>
-    <div>
-        <div class="article dirDiv">
-                <input name="token" type="hidden" value="" />
-            <div class="dirImg dirPostion">
-                <div class="xuanBig">
-                    <input name="token" type="hidden" value="" />
-                    <div class="item">
-                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                        <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                        </div>
-                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-                    </div>
-                    <div style="clear: left;"></div>
-                </div>
-            </div>
-            
-            <div class="dirImg dirAddto">
-                <div class="xuanBig">
-                    <div class="item dirAdd">
-                        <img class="addImg" src="../images/add.png" />
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="section">
+        <input name="token" type="hidden" value="" />
+        <ul class="article xuan">
+
+
+            <li class="articleAft"></li>
+        </ul>
+        <div class="xuanBut">添加</div>
     </div>
+
+
     <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
-        <button type="button" class="btn btn-primary cooOrder">提交</button>
+        <button type="button" class="btn btn-primary xuanOrder">提交</button>
     </div>
 </body>
 <script src="../js/jquery.min.js"></script>
@@ -109,61 +98,80 @@
 <script src="../js/toastr.min.js"></script>
 <script>
     $(function () {
-        toastr.options = { timeOut: "3000", positionClass: "toast-center-center" }; //超时时间 == 3秒
-        // 点击添加合作伙伴
-        $(".dirAdd").on("click", function () {
-            html = ' <div class="dirImg"><div class="xuanBig"><div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" /><div class="preBlock"><img class="preview" id="preview" alt="" name="pic" width="50" height="50" /></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" /></div><div style="clear: left;"></div></div></div>';
-            $(".dirAddto").before(html);
-        })
-        // 提交
-        $(".cooOrder").click(function () {
-            let arr = [];
-            for(let i=0;i<$(".preview").length;i++){
-                let src = $(".preview")[i].getAttribute("src");
-                if(src != null&&src != ""){
-                    arr.push(src);
+        toastr.options = {
+            timeOut: "3000",
+            positionClass: "toast-center-center"
+        }; //超时时间 == 3秒
+        $.ajax({
+            url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/homepage/partnerUp",
+            type: "post",
+            data: {},
+            dataType: "JSON",
+            success: function (res) {
+                if (res.code == 200) {
+                    let text1;
+                    res.list.forEach((item, index) => {
+                        text1 =
+                            `<li><div class="article" style="border:none;display: flex;padding: 10px 0 0 0;"><div class="dirImg" style="display: flex;"><span>图片：</span>` +
+                            `<div style="width:100px;height:100px;"><img src="${item.picture}" alt="" style="width:100%;height:100%;"></div><span> 修改为：</span><div class="xuanBig">` +
+                            `<div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" />` +
+                            `<div class="preBlock"><img class="preview rongyu" id="pre${index}" alt="" width="50" height="50" src="" data_id="${item.id}"/></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />` +
+                            `</div><div style="clear: left;"></div></div></div></div></li>`;
+                        $(".articleAft").before(text1);
+                    });
+                } else {
+                    toastr.error(res.message);
                 }
-                
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        // 点击添加宣传位
+        var sum = 5;
+        var html;
+        $(".xuanBut").on("click", function () {
+            sum++;
+            html =
+                '<li><div class="xuanDiv"><div class="xuanBig"><span>图片' +
+                '：</span><div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" /><div class="preBlock"><img class="preview" id="preview" alt="" name="pic" width="50" height="50" /></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" /></div><div style="clear: left;"></div></div></div></li>';
+
+            $(".articleAft").before(html);
+        })
+        // 提交 
+        $(".xuanOrder").on("click", function () {
+            var xuanArr = [];
+            for (let i = 0; i < $(".preview").length; i++) {
+                var obj = {};
+                obj.imgUrl = $(".preview")[i].getAttribute("src");
+                obj.id = $(".preview")[i].getAttribute("data_id");
+                xuanArr.push(obj);
             }
             $.ajax({
                 url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/homepage/partnerAdd",
                 type: "post",
                 data: {
-                    imgUrl: arr
+                    partner: xuanArr
                 },
                 dataType: "JSON",
                 success: function (res) {
-                    toastr.info(res.message);
+                    if (res.code == 200) {
+                        toastr.info(res.message);
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000)
+                    } else {
+                        toastr.error(res.message);
+                    }
+
                 },
                 error: function (err) {
                     console.log(err);
                 }
             })
         })
-        // 缸径来的时候
-        // $.ajax({
-        //         url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/homepage/partnerShow",
-        //         type: "get",
-        //         dataType: "JSON",
-        //         success: function (res) {
-        //             //toastr.info(res.message);
-        //             if(res.code == 200){
-        //                 for(let i=0;i<res.list.length;i++){
-        //                     html =  '<div class="dirImg"><div class="xuanBig"><div class="item"><input name="url" type="file" class="upload_input" onchange="change(this)" /><div class="preBlock"><img class="preview" id="preview" alt="" name="pic" width="50" height="50" src='+res.list[i].picture+'></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" /></div><div style="clear: left;"></div></div></div>';
-        //                     $(".dirPostion").before(html);
-        //                 }
-        //             }else{
-        //                 toastr.info(res.message);
-        //             }
-
-        //         },
-        //         error: function (err) {
-        //             console.log(err);
-        //         }
-        //     })
     })
-
-
 </script>
 
 </html>

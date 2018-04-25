@@ -55,16 +55,24 @@
         <div class="article">
             <!-- 存储 token  1小时有效 -->
             <input name="token" type="hidden" value="" />
-            <div class="item">
-                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                <div class="preBlock">
-                    <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+            <div class="dirImg">
+                    <div class="xuanBig" style="display: flex;">
+                        <input name="token" type="hidden" value="" />
+                        <span>图片：</span>
+                        <img class="previewEdit" id="previewEdit" alt="" name="pic" width="50" height="50" style="margin:0 10px 0 0;">
+                        <span>修改为：</span>
+                        <input type='hidden' name="editId">
+                        <div class="item">
+                            <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                            <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                            <div class="preBlock">
+                                <img class="preview" id="editImg" alt="" name="pic" width="50" height="50" />
+                            </div>
+                            <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                        </div>
+                        <div style="clear: left;"></div>
+                    </div>
                 </div>
-                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-            </div>
-            
-            <div style="clear: left;"></div>
             <div style="margin-top:10px;">格式：jpg,png| 尺寸：1920*1080| 大小：&lt;2M|保证图片文字清晰可见</div>
         </div>
     </div>
@@ -78,16 +86,34 @@
 <script>
 $(function(){
     toastr.options = {timeOut: "3000", positionClass: "toast-center-center"}; //超时时间 == 3秒
+        $.ajax({
+        url:"http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/homepage/bannerUp",
+        type:"post",
+        dataType:"JSON",
+        success:function(res){
+            if(res.code == 200){
+                $("#previewEdit").attr("src",res.list.picture);
+            }else{
+                toastr.info(res.message);
+            }
+        },
+        error:function(err){
+
+        }
+    })
 $(".asdfjk").click(function(){
     $.ajax({
         url:"http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/homepage/banner",
         type:"post",
         data:{
-            banner:$("#preview").attr("src")
+            banner:$("#editImg").attr("src")
         },
         dataType:"JSON",
         success:function(res){
             toastr.info(res.message);
+            setTimeout(function(){
+                window.location.reload();
+            },1000)
         },
         error:function(err){
 

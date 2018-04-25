@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/solution.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+</head>
+
+<body>
+    <nav>信息列表 &gt; 修改</nav>
+    <div style="margin: 10px 0 10px 23px;">
+        标题：
+        <input type="text" name="title">
+    </div>
+    <div style="margin:0 0 10px 23px;">
+        简介：
+        <input type="text" name="desc">
+    </div>
+    <div style="margin:0 0 10px 23px;">
+        作者：
+        <input type="text" name="author">
+    </div>
+    <div style="margin:0 0 10px 23px;">
+        发布时间：
+        <input type="text" name="time">
+    </div>
+    <div style="margin:0 0 10px 23px;display:flex;">
+        <span>信息种类：</span>
+        <select id="schoolMsg" class="">
+            <option value="">请选择</option>
+            <option value="最新资讯">最新资讯</option>
+            <option value="最热资讯">最热资讯</option>
+            <option value="热门推荐">热门推荐</option>
+            <option value="最新公告">最新公告</option>
+            <option value="学术周刊">学术周刊</option>
+
+        </select>
+    </div>
+    <input type="hidden" name="editId">
+    <!-- banner图 -->
+    <div class="section">
+        <div class="article dirDiv" style="border:none;">
+            <!-- 存储 token  1小时有效 -->
+            <input name="token" type="hidden" value="" />
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="thired" style="width:100%;height:100%;">
+                </div>
+                <span> 修改为：</span>
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview3" alt="" name="pic" width="50" height="50" src="" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+        </div>
+        <div style="margin:0 0 0 23px;">
+            <span>详情：</span>
+            <script id="editor" type="text/plain" style="height:500px;"></script>
+        </div>
+
+    </div>
+
+
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
+        <button type="button" class="btn btn-primary order">提交</button>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
+<script src="../js/toastr.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/_examples/editor_api.js"></script>
+<script>
+    var ue = UE.getEditor('editor');
+</script>
+<script>
+    $(function () {
+        toastr.options = {
+            timeOut: "1000",
+            positionClass: "toast-center-center"
+        }; //超时时间 == 3秒
+        $.ajax({
+            url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/college/collegeUp",
+            type: "post",
+            dataType: "JSON",
+            data: {
+                id: window.sessionStorage.getItem("msgId")
+            },
+            success: function (res) {
+                $("input[name=editId]").val(res.list.id);
+                $("input[name=title]").val(res.list.title);
+                $(".thired").attr("src",res.list.picture);
+                $("input[name=desc]").val(res.list.brief_introduction);
+                $("input[name=time]").val(res.list.time);
+                $("#schoolMsg").find(`option[value=${res.list.type}]`).attr("selected",true);
+                $("input[name=author]").val(res.list.author);
+                var de = res.list.content;
+                ue.addListener("ready", function () {
+                    // editor准备好之后才可以使用
+                    ue.setContent(de);
+
+                });
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        //  修改  提交
+        $(".order").on("click", function () {
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/college/collegeUpdate",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    id: $("input[name=editId]").val(),
+                    title: $("input[name=title]").val(),
+                    imgUrl:$("#preview3").attr("src"),
+                    desc:$("input[name=desc]").val(),
+                    content:UE.getEditor('editor').getContent(),
+                    type:$("#schoolMsg").val(),
+                    author:$("input[name=author]").val()
+
+                },
+                success: function (res) {
+                    if (res.code == 200) {
+                        window.location.href = "msg.html";
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
+
+    })
+</script>
+
+</html>

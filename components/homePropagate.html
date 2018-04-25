@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
     <link rel="stylesheet" href="../css/upload.css">
     <link rel="stylesheet" href="../css/reset.css">
-    <link rel="stylesheet" href="../css/toastr.min.css">  
+    <link rel="stylesheet" href="../css/toastr.min.css">
     <style>
         .xuan,
         .proImg,
@@ -15,6 +15,11 @@
             display: flex;
             flex-flow: wrap;
             margin: 0 0 10px 0;
+        }
+
+        .xuan li {
+            width: 25%;
+            margin: 0 0 20px 0;
         }
 
         .xuanDiv {
@@ -73,120 +78,12 @@
     <!-- 宣传位 -->
     <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">宣传位</p>
     <div class="section">
-        <div class="article xuan">
-            <div class="xuanDiv">
-                <div>
-                    <span>标题：
-                        <input type="text" class="title">
-                    </span>
-                    <span>链接：
-                        <input type="text" class="imgUrl">
-                    </span>
-                </div>
-                <div class="xuanBig">
-                    <input name="token" type="hidden" value="" />
-                    <span>图1：</span>
-                    <div class="item">
-                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                        <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                        </div>
-                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-                    </div>
-                    <div style="clear: left;"></div>
-                </div>
-            </div>
-            <div class="xuanDiv">
-                <div>
-                    <span>标题：
-                        <input type="text" class="title">
-                    </span>
-                    <span>链接：
-                        <input type="text" class="imgUrl">
-                    </span>
-                </div>
-                <div class="xuanBig">
-                    <span>图2：</span>
-                    <div class="item">
-                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                        <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                        </div>
-                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-                    </div>
-                    <div style="clear: left;"></div>
-                </div>
-            </div>
-            <div class="xuanDiv">
-                <div>
-                    <span>标题：
-                        <input type="text" class="title">
-                    </span>
-                    <span>链接：
-                        <input type="text" class="imgUrl">
-                    </span>
-                </div>
-                <div class="xuanBig">
-                    <span>图3：</span>
-                    <div class="item">
-                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                        <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                        </div>
-                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-                    </div>
-                    <div style="clear: left;"></div>
-                </div>
-            </div>
-            <div class="xuanDiv">
-                <div>
-                    <span>标题：
-                        <input type="text" class="title">
-                    </span>
-                    <span>链接：
-                        <input type="text" class="imgUrl">
-                    </span>
-                </div>
-                <div class="xuanBig">
-                    <span>图4：</span>
-                    <div class="item">
-                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                        <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                        </div>
-                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-                    </div>
-                    <div style="clear: left;"></div>
-                </div>
-            </div>
-            <div class="xuanDiv">
-                <div>
-                    <span>标题：
-                        <input type="text" class="title">
-                    </span>
-                    <span>链接：
-                        <input type="text" class="imgUrl">
-                    </span>
-                </div>
-                <div class="xuanBig">
-                    <span>图5：</span>
-                    <div class="item">
-                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                        <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                        </div>
-                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-                    </div>
-                    <div style="clear: left;"></div>
-                </div>
-            </div>
-            <div class="articleAft"></div>
-        </div>
+        <input name="token" type="hidden" value="" />
+        <ul class="article xuan">
+
+
+            <li class="articleAft"></li>
+        </ul>
         <div class="xuanBut">添加</div>
     </div>
 
@@ -201,13 +98,45 @@
 <script src="../js/toastr.min.js"></script>
 <script>
     $(function () {
-        toastr.options = {timeOut: "3000", positionClass: "toast-center-center"}; //超时时间 == 3秒
+        toastr.options = {
+            timeOut: "3000",
+            positionClass: "toast-center-center"
+        }; //超时时间 == 3秒
+        $.ajax({
+            url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/homepage/propagateUp",
+            type: "post",
+            data: {},
+            dataType: "JSON",
+            success: function (res) {
+                if (res.code == 200) {
+                    let text1;
+                    res.list.forEach((item, index) => {
+                        text1 =
+                            `<li><div class="article" style="border:none;display: flex;padding: 10px 0 0 0;"><div class="dirImg" style="display: flex;"><span>图片：</span>` +
+                            `<div style="width:100px;height:100px;"><img src="${item.picture}" alt="" style="width:100%;height:100%;"></div><span> 修改为：</span><div class="xuanBig">` +
+                            `<div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" />` +
+                            `<div class="preBlock"><img class="preview rongyu" id="pre${index}" alt="" width="50" height="50" src="" data_id="${item.id}"/></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />` +
+                            `</div><div style="clear: left;"></div></div></div></div><div style="margin:10px 10px 10px 0;"><span>标题：<input type="text" value="${item.title}" name="rongTitle" class="title"/></span></div><div><span>链接：<input type="text" value="${item.link}" name="rongLink" class="imgUrl"/></span></div></li>`;
+                        $(".articleAft").before(text1);
+                    });
+                } else {
+                    toastr.error(res.message);
+                }
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
         // 点击添加宣传位
         var sum = 5;
         var html;
         $(".xuanBut").on("click", function () {
             sum++;
-            html = '<div class="xuanDiv"><div><span>标题：<input type="text" class="title"></span><span>链接：<input type="text" class="imgUrl"></span></div><div class="xuanBig"><span>图' + sum + '：</span><div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" /><div class="preBlock"><img class="preview" id="preview" alt="" name="pic" width="50" height="50" /></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" /></div><div style="clear: left;"></div></div></div>';
+            html =
+                '<li><div class="xuanDiv"><div><span>标题：<input type="text" class="title"></span><span>链接：<input type="text" class="imgUrl"></span></div><div class="xuanBig"><span>图' +
+                sum +
+                '：</span><div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" /><div class="preBlock"><img class="preview" id="preview" alt="" name="pic" width="50" height="50" /></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" /></div><div style="clear: left;"></div></div></div></li>';
 
             $(".articleAft").before(html);
         })
@@ -219,34 +148,33 @@
                 obj.title = $(".title")[i].value;
                 obj.title_link = $(".imgUrl")[i].value;
                 obj.imgUrl = $(".preview")[i].getAttribute("src");
-                if (obj.title != "" && obj.imgUrl != "") {
-                    xuanArr.push(obj);
-                }
+                obj.id = $(".preview")[i].getAttribute("data_id");
+                xuanArr.push(obj);
             }
             $.ajax({
                 url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/homepage/propagateAdd",
                 type: "post",
-                data: { propagate: xuanArr },
+                data: {
+                    propagate: xuanArr
+                },
                 dataType: "JSON",
                 success: function (res) {
-                    if(res.code == 200){
+                    if (res.code == 200) {
                         toastr.info(res.message);
-                    }else{
+                        setTimeout(function () {
+                            window.location.reload();
+                        }, 1000)
+                    } else {
                         toastr.error(res.message);
                     }
-                   
+
                 },
-                error: function (err) { 
+                error: function (err) {
                     console.log(err);
                 }
             })
         })
     })
-
-
-
-
-
 </script>
 
 </html>

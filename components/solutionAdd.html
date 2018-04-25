@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/solution.css">
+</head>
+
+<body>
+    <nav>应用列表 &gt; 添加</nav>
+    <div style="margin: 10px 0 10px 23px;">
+        标题：<input type="text" name="title">
+    </div>
+    <div style="margin:0 0 10px 23px;">
+        简介：<input type="text" name="desc">
+    </div>
+    <!-- banner图 -->
+    <div class="section">
+        <div class="article dirDiv" style="border:none;">
+            <!-- 存储 token  1小时有效 -->
+            <input name="token" type="hidden" value="" />
+            <div class="dirImg">
+                <div class="xuanBig">
+                 <span>图片：</span>                       
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+        </div>
+        <div style="margin:0 0 0 23px;">
+            <span>详情：</span>
+            <script id="editor" type="text/plain" style="height:500px;"></script>
+        </div>
+
+    </div>
+
+
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
+        <button type="button" class="btn btn-primary useOrder">提交</button>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/_examples/editor_api.js"></script>
+<script>
+            var ue = UE.getEditor('editor');
+</script>
+<script>
+    $(function () {
+        $(".useOrder").on("click",function(){
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/solve/skillAdd",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    type: window.localStorage.getItem("type"),
+                    title: $("input[name=title]").val(),
+                    imgUrl:$("#preview").attr("src"),
+                    desc:$("input[name=desc]").val(),
+                    content:UE.getEditor('editor').getContent()
+                },
+                success: function (res) {
+                    console.log(res);
+                    if(res.code == 200){
+                        window.location.href = "solutionSolve.html";
+                    }else{
+                        alert(res.message);
+                    }
+        
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
+    })
+</script>
+
+</html>

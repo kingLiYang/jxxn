@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../css/upload.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/solution.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">
 </head>
 
 <body>
@@ -15,19 +16,28 @@
     <!-- banner图 -->
     <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">banner图</p>
     <div class="section">
+        <input type="hidden" name="imgId">
         <div class="article">
             <!-- 存储 token  1小时有效 -->
             <input name="token" type="hidden" value="" />
-            <div class="item">
-                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                <div class="preBlock">
-                    <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="second" style="width:100%;">
                 </div>
-                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                <span> 修改为：</span>
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="previewBanner" alt="" name="pic" width="50" height="50" src="" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
             </div>
-
-            <div style="clear: left;"></div>
             <div style="margin-top:10px;">格式：jpg,png| 尺寸：1920*480| 大小：&lt;2M|保证图片文字清晰可见</div>
         </div>
     </div>
@@ -36,28 +46,41 @@
     <div>
         <div class="boxTex">
             <p>相变材料：</p>
-            <textarea name="" id="" cols="80" rows="5"></textarea>
+            <div>
+                <script id="editor" type="text/plain" style="height:500px;"></script>
+            </div>
         </div>
         <div class="boxTex">
             <p>云平台:</p>
-            <textarea name="" id="" cols="80" rows="5"></textarea>
+            <div>
+                <script id="editor1" type="text/plain" style="height:500px;"></script>
+            </div>
         </div>
         <div class="boxTex">
             <p>物联网+物流:</p>
-            <textarea name="" id="" cols="80" rows="5"></textarea>
+            <div>
+                <script id="editor2" type="text/plain" style="height:500px;"></script>
+            </div>
         </div>
         <div class="article" style="border:none;display: flex;padding: 30px 0 0 35px;">
-            <!-- 存储 token  1小时有效 -->
-            <div class="item">
-                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                <div class="preBlock">
-                    <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="fi" style="width:100%;">
                 </div>
-                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                <span> 修改为：</span>
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview1" alt="" name="pic" width="50" height="50" src="" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
             </div>
-
-            <div style="clear: left;"></div>
             <div style="margin-top:10px;">格式：jpg,png| 尺寸：1200*1000| 大小：&lt;1M|保证图片文字清晰可见</div>
         </div>
 
@@ -66,17 +89,24 @@
     <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">技术应用</p>
     <div>
         <div class="article" style="border:none;display: flex;padding: 30px 0 0 35px;">
-            <!-- 存储 token  1小时有效 -->
-            <div class="item">
-                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                <div class="preBlock">
-                    <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="thired" style="width:100%;">
                 </div>
-                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                <span> 修改为：</span>
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview2" alt="" name="pic" width="50" height="50" src="" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
             </div>
-
-            <div style="clear: left;"></div>
             <div style="margin-top:10px;">格式：jpg,png| 尺寸：1200*400| 大小：&lt;1M|保证图片文字清晰可见</div>
         </div>
     </div>
@@ -84,17 +114,24 @@
     <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">企业优势</p>
     <div>
         <div class="article" style="border:none;display: flex;padding: 30px 0 0 35px;">
-            <!-- 存储 token  1小时有效 -->
-            <div class="item">
-                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                <div class="preBlock">
-                    <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="four" style="width:100%;">
                 </div>
-                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                <span> 修改为：</span>
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="preview3" alt="" name="pic" width="50" height="50" src="" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
             </div>
-
-            <div style="clear: left;"></div>
             <div style="margin-top:10px;">格式：jpg,png| 尺寸：1200*400| 大小：&lt;1M|保证图片文字清晰可见</div>
         </div>
     </div>
@@ -102,45 +139,7 @@
     <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">荣誉资质</p>
     <div class="boxDiv">
         <ul>
-            <li>
-                <div class="xuanBig">
-                    <input name="token" type="hidden" value="" />
-                    <span>上传图片：</span>
-                    <div class="item">
-                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                        <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                        </div>
-                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-                    </div>
-                    <div style="clear: left;"></div>
-                </div>
-                <div>
-                    <span>标题：
-                        <input type="text" />
-                    </span>
-                </div>
-            </li>
-            <li>
-                <div class="xuanBig">
-                    <span>上传图片：</span>
-                    <div class="item">
-                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                        <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                        </div>
-                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
-                    </div>
-                    <div style="clear: left;"></div>
-                </div>
-                <div>
-                    <span>标题：
-                        <input type="text" />
-                    </span>
-                </div>
-            </li>
+      
             <li class="boxPush"></li>
         </ul>
         <div class="dirImg">
@@ -153,23 +152,130 @@
     </div>
 
     <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
-        <button type="button" class="btn btn-primary">提交</button>
+        <button type="button" class="btn btn-primary solutionOrder">提交</button>
     </div>
 </body>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/imgUp.js"></script>
 <script src="../js/customLoad.js"></script>
+<script src="../js/toastr.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/_examples/editor_api.js"></script>
+<script>
+    var ue = UE.getEditor('editor');
+    var ue1 = UE.getEditor('editor1');
+    var ue2 = UE.getEditor('editor2');
+</script>
 <script>
     $(function () {
+        toastr.options = {
+            timeOut: "1000",
+            positionClass: "toast-center-center"
+        }; //超时时间 == 1秒
         // 点击添加
         var html;
         $(".boxAdd").on("click", function () {
-            html = ' <li><div class="xuanBig"><span>上传图片：</span><div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" /><div class="preBlock"><img class="preview" id="preview" alt="" name="pic" width="50" height="50" /></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" /></div><div style="clear: left;"></div></div><div><span>标题：<input type="text" /></span></div></li>';
+            html =
+                ' <li><div class="xuanBig"><span>上传图片：</span><div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" /><div class="preBlock"><img class="preview rongyu" id="preview" alt="" width="50" height="50"src="" data_id="" /></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" /></div><div style="clear: left;"></div></div><div><span>标题：<input type="text" name="rongTitle"/></span></div></li>';
             $(".boxPush").before(html);
         })
+        // 获取内容
+        $.ajax({
+            url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/solve/solveUp",
+            type: "post",
+            data: {
+
+            },
+            dataType: "JSON",
+            success: function (res) {
+                if (res.code == 200) {
+                    let text1;
+                    res.honor.forEach((item,index) => {
+                        text1 = `<li><div class="article" style="border:none;display: flex;padding: 10px 0 0 35px;"><div class="dirImg" style="display: flex;"><span>图片：</span>`+
+                            `<div style="width:100px;height:100px;"><img src="${item.picture}" alt="" style="width:100%;"></div><span> 修改为：</span><div class="xuanBig">`+
+                            `<div class="item"><img class="addImg" onclick="clickImg(this);" src="../images/upload.png" /><input name="url" type="file" class="upload_input" onchange="change(this)" />`+
+                            `<div class="preBlock"><img class="preview rongyu" id="pre${index}" alt="" width="50" height="50" src="" data_id="${item.id}"/></div><img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />`+
+                            `</div><div style="clear: left;"></div></div></div></div><div><span>标题：<input type="text" value="${item.content}" name="rongTitle"/></span></div></li>`;
+                            $(".boxPush").before(text1);
+                    });
+                    
+
+
+                    ue.addListener("ready", function () {
+                        // editor准备好之后才可以使用
+                        ue.setContent(res.solve.xbcl);
+
+                    });
+                    ue1.addListener("ready", function () {
+                        // editor准备好之后才可以使用
+                        ue1.setContent(res.solve.ypt);
+
+                    });
+                    ue2.addListener("ready", function () {
+                        // editor准备好之后才可以使用
+                        ue2.setContent(res.solve.wlw);
+
+                    });
+                    $(".second").attr("src", res.solve.banner); // banner图
+                    $(".fi").attr("src", res.solve.picture1);
+                    $(".thired").attr("src", res.solve.picture2);
+                    $(".four").attr("src", res.solve.picture3);
+                    $("input[name=imgId]").attr("data_id", res.solve.id);
+
+
+                } else {
+                    toastr.error(res.message);
+                }
+
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        // 提交
+        $('.solutionOrder').on("click", function () {
+            let arr = [];
+            for(let i=0;i<$(".rongyu").length;i++){
+                let obj = {};
+                obj.id = $($(".rongyu")[i]).attr("data_id");
+                obj.title = $($("input[name=rongTitle]")[i]).val();
+                obj.imgUrl = $($(".rongyu")[i]).attr("src");
+                arr.push(obj);
+            }
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/solve/solveUpdate",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    id: $('input[name=imgId]').attr("data_id"),
+                    banner:$("#previewBanner").attr('src'),
+                    xiangBian:UE.getEditor('editor').getContent(),
+                    rainBow:UE.getEditor('editor1').getContent(),
+                    sap:UE.getEditor('editor2').getContent(),
+                    scienceImg:$("#preview1").attr('src'),
+                    skillImg:$("#preview2").attr('src'),
+                    companyImg:$("#preview3").attr('src'),
+                    honor:arr
+
+                },
+                success: function (res) {
+                    if (res.code == 200) {
+                        toastr.info(res.message);
+                        setTimeout(function () {
+                            window.location.reload();
+
+                        }, 1000)
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
     })
-
-
 </script>
 
 </html>

@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/solution.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+</head>
+
+<body>
+    <nav>关于我们</nav>
+    <!-- banner图 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">banner图</p>
+    <div class="section">
+        <div class="article">
+            <!-- 存储 token  1小时有效 -->
+            <input name="token" type="hidden" value="" />
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="second" style="width:100%;">
+                </div>
+                <span> 修改为：</span>
+                <div class="xuanBig">
+                    <div class="item">
+                        <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                        <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                        <div class="preBlock">
+                            <img class="preview" id="previewBanner" alt="" name="pic" width="50" height="50" src="" />
+                        </div>
+                        <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                    </div>
+                    <div style="clear: left;"></div>
+                </div>
+            </div>
+            <div style="margin-top:10px;">格式：jpg,png| 尺寸：1920*480| 大小：&lt;2M|保证图片文字清晰可见</div>
+        </div>
+    </div>
+    <!-- 发展历程 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">发展历程</p>
+    <div>
+        <div class="dirImg" style="display: flex;">
+            <span>图片：</span>
+            <div style="width:100px;height:100px;">
+                <img src="" alt="" class="secondImg" style="width:100%;">
+            </div>
+            <span> 修改为：</span>
+            <div class="xuanBig">
+                <div class="item">
+                    <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                    <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                    <div class="preBlock">
+                        <img class="preview" id="previewFa" alt="" name="pic" width="50" height="50" src="" />
+                    </div>
+                    <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                </div>
+                <div style="clear: left;"></div>
+            </div>
+        </div>
+    </div>
+    <!-- 公司介绍 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">公司介绍</p>
+    <div>
+        <span>文字介绍：</span>
+        <div>
+            <script id="editor" type="text/plain" style="height:500px;"></script>
+        </div>
+        <div style="margin:20px 0;">
+            <span>轮播图上传：请上传3张清晰图，尺寸为480*320，格式为jpg/png，每张图片尺寸一致，单张图片不超过500kb</span>
+            <div class="section">
+                <div class="article dirDiv" style="border:none;">
+                    <!-- 存储 token  1小时有效 -->
+                    <div class="dirImg" style="display: flex;">
+                        <span>图片：</span>
+                        <div style="width:100px;height:100px;">
+                            <img src="" alt="" class="first" style="width:100%;">
+                        </div>
+                        <span> 修改为：</span>
+                        <div class="xuanBig">
+                            <div class="item">
+                                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                                <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                                <div class="preBlock">
+                                    <img class="preview lun" id="preview1" alt="" name="pic" width="50" height="50" src="" />
+                                </div>
+                                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                            </div>
+                            <div style="clear: left;"></div>
+                        </div>
+                    </div>
+                    <div class="dirImg" style="display: flex;">
+                        <span>图片：</span>
+                        <div style="width:100px;height:100px;">
+                            <img src="" alt="" class="second1" style="width:100%;">
+                        </div>
+                        <span> 修改为：</span>
+                        <div class="xuanBig">
+                            <div class="item">
+                                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                                <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                                <div class="preBlock">
+                                    <img class="preview lun" id="preview2" alt="" name="pic" width="50" height="50" src="" />
+                                </div>
+                                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                            </div>
+                            <div style="clear: left;"></div>
+                        </div>
+                    </div>
+                    <div class="dirImg" style="display: flex;">
+                        <span>图片：</span>
+                        <div style="width:100px;height:100px;">
+                            <img src="" alt="" class="thired" style="width:100%;">
+                        </div>
+                        <span> 修改为：</span>
+                        <div class="xuanBig">
+                            <div class="item">
+                                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                                <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                                <div class="preBlock">
+                                    <img class="preview lun" id="preview3" alt="" name="pic" width="50" height="50" src="" />
+                                </div>
+                                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                            </div>
+                            <div style="clear: left;"></div>
+                        </div>
+                    </div>
+
+                    <div style="clear: left;"></div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+    <!-- 团队风采 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">团队风采</p>
+    <div>
+        <span>文字介绍：</span>
+        <div>
+            <script id="editor1" type="text/plain" style="height:500px;"></script>
+        </div>
+    </div>
+    <!-- 人才理念 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">人才理念</p>
+    <div>
+        <span>文字介绍：</span>
+        <div>
+            <script id="editor2" type="text/plain" style="height:500px;"></script>
+        </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
+        <button type="button" class="btn btn-primary mineOrder">提交</button>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
+<script src="../js/toastr.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/_examples/editor_api.js"></script>
+<script>
+    var ue = UE.getEditor('editor');
+    var ue1 = UE.getEditor('editor1');
+    var ue2 = UE.getEditor('editor2');
+</script>
+<script>
+    $(function () {
+        show();
+
+        function show() {
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/about/aboutUp",
+                type: "post",
+                data: {
+
+                },
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.code == 200) {
+                        ue.addListener("ready", function () { // 公司介绍
+                            // editor准备好之后才可以使用
+                            ue.setContent(res.list.about.introduction);
+
+                        });
+                        ue1.addListener("ready", function () { // 团队风采
+                            // editor准备好之后才可以使用
+                            ue1.setContent(res.list.about.style);
+
+                        });
+                        ue2.addListener("ready", function () { // 人才理念
+                            // editor准备好之后才可以使用
+                            ue2.setContent(res.list.about.talent_idea);
+
+                        });
+                        $(".second").attr("src", res.list.about.picture); // banner图
+                        $(".first").attr("src", res.list.picture[0].picture);
+                        $(".second1").attr("src", res.list.picture[1].picture);
+                        $(".secondImg").attr("src",res.list.about.history)// 发展历程
+                        if (res.list.picture[2] == undefined) {
+                            $(".thired").attr("src", '');
+                            $("#preview3").attr("data_id", '');
+                        } else {
+                            $(".thired").attr("src", res.list.picture[2].picture);
+                            $("#preview3").attr("data_id", res.list.picture[2].id);
+                        }
+                        $("#preview1").attr("data_id", res.list.picture[0].id);
+                        $("#preview2").attr("data_id", res.list.picture[1].id);
+                        $("#previewBanner").attr("data_id", res.list.about.id);
+
+
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+        // 提交
+        $(".mineOrder").on("click", function () {
+            let arr = [];
+            for (let i = 0; i < $(".lun").length; i++) {
+                var obj = {};
+                obj.id = $(".lun")[i].getAttribute("data_id");
+                obj.picture = $(".lun")[i].getAttribute("src");
+                if (obj.id != "" || obj.picture != "") {
+                    arr.push(obj);
+                }
+            }
+
+
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/about/aboutUpdate",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    lun: arr,
+                    banner: $("#previewBanner").attr("src"),
+                    id:$("#previewBanner").attr("data_id"),
+                    companyText:  UE.getEditor('editor').getContent(),
+                    teamText: UE.getEditor('editor1').getContent(),
+                    manText:  UE.getEditor('editor2').getContent(),
+                    history:  $("#previewFa").attr("src")// 发展历程
+                },
+                success: function (res) {
+                    if (res.code == 200) {
+                        toastr.info(res.message);
+                        setTimeout(function(){
+                            window.location.reload();
+
+                        },1000)
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+
+        })
+    })
+</script>
+
+</html>

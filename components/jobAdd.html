@@ -1,0 +1,86 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/upload.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/solution.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+</head>
+
+<body>
+    <nav>关于我们/招聘信息</nav>
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">岗位</p>
+    <div>
+        <input type="text" class="jobName">
+    </div>
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">标签 </p>
+    <span>格式为:15k-30k /北京 / 经验3-5年 / 本科及以上 / 全职</span>
+    <div>
+        <input type="text" class="jobPag">
+    </div>
+    <!-- 职位描述 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">职位描述</p>
+    <div>
+        <div>
+            <script id="editor" type="text/plain" style="height:500px;"></script>
+        </div>
+    </div>
+    <!-- 职位要求 -->
+    <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">职位要求</p>
+    <div>
+        <div>
+            <script id="editor1" type="text/plain" style="height:500px;"></script>
+        </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
+        <button type="button" class="btn btn-primary mineOrder">提交</button>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/imgUp.js"></script>
+<script src="../js/customLoad.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/ueditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="../ueditor/_examples/editor_api.js"></script>
+<script src="../js/toastr.min.js"></script>
+<script>
+    var ue = UE.getEditor('editor');
+    var ue1 = UE.getEditor('editor1');
+</script>
+<script>
+    $(function () {
+        // 提交
+        $(".mineOrder").on("click", function () {
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/about/jobsAdd",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    job:$(".jobName").val(),
+                    pag: $(".jobPag").val(),
+                    describe:  UE.getEditor('editor').getPlainTxt(),
+                    requirement: UE.getEditor('editor1').getPlainTxt()
+
+                },
+                success: function (res) {
+                    if (res.code == 200) {
+                            window.location.href = "recruit.html";
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+
+        })
+    })
+</script>
+
+</html>

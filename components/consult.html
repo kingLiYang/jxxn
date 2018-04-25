@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>产品管理</title>
+    <link rel="stylesheet" href="../utilLib/bootstrap.min.css" type="text/css" media="screen" />
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">
+    <style>
+        .boxDiv {
+            padding: 20px 0 0 0;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>产品中心 &gt; 咨询热线</nav>
+    <div class="boxDiv">
+        <!--表格-->
+        <div>
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>姓名</th>
+                            <th>电话</th>
+                        </tr>
+                    </thead>
+                    <tbody class="proList">
+                        <tr>
+                            <td>
+                                <input type="text" class="nameNum">
+                            </td>
+                            <td>
+                                <input type="text" class="numPhonr">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="nameNum">
+                            </td>
+                            <td>
+                                <input type="text" class="numPhonr">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="nameNum">
+                            </td>
+                            <td>
+                                <input type="text" class="numPhonr">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="text" class="nameNum">
+                            </td>
+                            <td>
+                                <input type="text" class="numPhonr">
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
+        <button type="button" class="btn btn-primary mineOrder">提交</button>
+    </div>
+</body>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/toastr.min.js"></script>
+
+<script>
+      $(function () {
+        toastr.options = {
+            timeOut: "1000",
+            positionClass: "toast-center-center"
+        }; //超时时间 == 3秒
+        show();
+
+        function show() {
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/products/phoneUp",
+                type: "post",
+                data: {
+
+                },
+                dataType: "JSON",
+                success: function (res) {
+                    if (res.code == 200) {
+                        console.log(res.list);
+                        for(let i=0;i<res.list.length;i++){
+                            $(".nameNum")[i].value = res.list[i].name;
+                            $(".numPhonr")[i].value = res.list[i].tel;
+                        }
+
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        }
+        // 提交
+        $(".mineOrder").on("click", function () {
+            let arr = [];
+            for (let i = 0; i < $(".nameNum").length; i++) {
+                var obj = {};
+                obj.name = $(".nameNum")[i].value;
+                obj.num = $(".numPhonr")[i].value;
+                if (obj.name != "" && obj.num != "") {
+                    arr.push(obj);
+                }
+            }
+
+
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/products/phoneUpdate",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    phone:arr
+                },
+                success: function (res) {
+                    if (res.code == 200) {
+                        toastr.info(res.message);
+                        setTimeout(function(){
+                            window.location.reload();
+
+                        },1000)
+                    } else {
+                        toastr.error(res.message);
+                    }
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+
+        })
+    })
+</script>
+
+</html>

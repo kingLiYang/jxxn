@@ -836,6 +836,7 @@
     };
 
 
+
     UE.delEditor = function (id) {
         var editor;
         if (editor = instances[id]) {

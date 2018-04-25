@@ -8,6 +8,15 @@
     <link rel="stylesheet" href="../css/upload.css">
     <link rel="stylesheet" href="../css/reset.css">
     <link rel="stylesheet" href="../css/solution.css">
+    <link rel="stylesheet" href="../css/toastr.min.css">  
+    <style>
+        .first,
+        .second,
+        .thired,
+        .four {
+            width: 100%;
+        }
+    </style>
 </head>
 
 <body>
@@ -19,99 +28,164 @@
         <div class="article dirDiv" style="border:none;">
             <!-- 存储 token  1小时有效 -->
             <input name="token" type="hidden" value="" />
-            <div class="dirImg">
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="first">
+                </div>
+                <span> 修改为：</span>
                 <div class="xuanBig">
                     <div class="item">
                         <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
                         <input name="url" type="file" class="upload_input" onchange="change(this)" />
                         <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                            <img class="preview" id="preview1" alt="" name="pic" width="50" height="50" src=""/>
                         </div>
                         <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
                     </div>
                     <div style="clear: left;"></div>
                 </div>
             </div>
-            <div class="dirImg">
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="second">
+                </div>
+                <span> 修改为：</span>
                 <div class="xuanBig">
                     <div class="item">
                         <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
                         <input name="url" type="file" class="upload_input" onchange="change(this)" />
                         <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                            <img class="preview" id="preview2" alt="" name="pic" width="50" height="50" src="" />
                         </div>
                         <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
                     </div>
                     <div style="clear: left;"></div>
                 </div>
             </div>
-            <div class="dirImg">
+            <div class="dirImg" style="display: flex;">
+                <span>图片：</span>
+                <div style="width:100px;height:100px;">
+                    <img src="" alt="" class="thired">
+                </div>
+                <span> 修改为：</span>
                 <div class="xuanBig">
                     <div class="item">
                         <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
                         <input name="url" type="file" class="upload_input" onchange="change(this)" />
                         <div class="preBlock">
-                            <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
+                            <img class="preview" id="preview3" alt="" name="pic" width="50" height="50" src=""/>
                         </div>
                         <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
                     </div>
                     <div style="clear: left;"></div>
                 </div>
             </div>
+
             <div style="clear: left;"></div>
-          
+
         </div>
-        <div>
-                <p>
-                    <span>图1链接：
-                        <input type="text" />
-                    </span>
-                </p>
-                <p>
-                    <span>图2链接：
-                        <input type="text" />
-                    </span>
-                </p>
-                <p>
-                    <span>图3链接：
-                        <input type="text" />
-                    </span>
-                </p>
-            </div>
+
     </div>
     <!-- 行业资讯 -->
     <p style="border-bottom:1px dashed #ccc;padding:10px 0;font-weight:800;">行业资讯</p>
     <div>
-
-        <div class="article" style="border:none;display: flex;padding: 30px 0 0 35px;">
-            <div class="item">
-                <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
-                <input name="url" type="file" class="upload_input" onchange="change(this)" />
-                <div class="preBlock">
-                    <img class="preview" id="preview" alt="" name="pic" width="50" height="50" />
-                </div>
-                <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+        <div class="dirImg" style="display: flex;">
+            <span>图片：</span>
+            <div style="width:100px;height:100px;">
+                <img src="" alt="" class="four">
             </div>
-
-            <div style="clear: left;"></div>
-            <div style="margin-top:10px;">格式：请上传1张清晰图，尺寸为竖图720*360，格式为jpg/png，每张图片尺寸一致，单张图片不超过1MB。</div>
+            <span> 修改为：</span>
+            <div class="xuanBig">
+                <div class="item">
+                    <img class="addImg" onclick="clickImg(this);" src="../images/upload.png" />
+                    <input name="url" type="file" class="upload_input" onchange="change(this)" />
+                    <div class="preBlock">
+                        <img class="preview" id="preview4" alt="" name="pic" width="50" height="50" src=""/>
+                    </div>
+                    <img class="delete" onclick="deleteImg(this)" src="../images/delete.png" />
+                </div>
+                <div style="clear: left;"></div>
+                <div style="margin-top:10px;">格式：请上传1张清晰图，尺寸为竖图720*360，格式为jpg/png，每张图片尺寸一致，单张图片不超过1MB。</div>
+            </div>
         </div>
 
     </div>
-   
+
     <div style="display:flex;justify-content:center;margin:0 0 10px 0;">
-        <button type="button" class="btn btn-primary">提交</button>
+        <button type="button" class="btn btn-primary schoolEdit">提交</button>
     </div>
 </body>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/imgUp.js"></script>
 <script src="../js/customLoad.js"></script>
+<script src="../js/toastr.min.js"></script>
 <script>
     $(function () {
+        toastr.options = {timeOut: "3000", positionClass: "toast-center-center"}; //超时时间 == 3秒
+        // 获取内容
+        show();
+        function show(){
+            $.ajax({
+            url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/college/pictureUp",
+            type: "post",
+            dataType: "JSON",
+            data: {},
+            success: function (res) {
+                console.log(res);
+                $(".first").attr("src", res.banner[0].picture);
+                $(".second").attr("src", res.banner[1].picture);
+                $(".thired").attr("src", res.banner[2].picture);
+                $(".four").attr("src", res.newsPic[0].picture);
+                $("#preview4").attr("data_id", res.newsPic[0].id);
+                $("#preview3").attr("data_id", res.banner[2].id);
+                $("#preview2").attr("data_id", res.banner[1].id);
+                $("#preview1").attr("data_id", res.banner[0].id);
 
+            },
+            error: function (err) {
+                console.log(err);
+            }
+        })
+        }
+   
+        // 提交
+        $(".schoolEdit").on("click", function () {
+            var arr = [];
+            for (let i = 0; i < $(".preview").length; i++) {
+                var obj = {};
+                obj.id = $($(".preview")[i]).attr("data_id");
+               obj.imgUrl = $($(".preview")[i]).attr("src");
+                if (obj.id != "" && obj.imgUrl != "") {
+                    arr.push(obj);
+                }
+            }
+
+            $.ajax({
+                url: "http://out.ccsc58.cc/DATA_PORT_JINGXINXIANGNENG_1.01/jxxn/public/index.php/admin/college/pictureUpdate",
+                type: "post",
+                dataType: "JSON",
+                data: {
+                    picture:arr
+                },
+                success: function (res) {
+                    console.log(res);
+                    if(res.code == 200){
+                        toastr.info(res.message);
+                        window.location.reload(); 
+                    }else{
+                        toastr.error(res.message);
+                    }
+             
+
+                },
+                error: function (err) {
+                    console.log(err);
+                }
+            })
+        })
     })
-
-
 </script>
 
 </html>
